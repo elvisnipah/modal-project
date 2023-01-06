@@ -6,7 +6,7 @@ import ErrorModal from "./components/ErrorModal";
 function App() {
   const [users, setUsers] = useState([]);
 
-  const [invalidInput, setInvalidInput] = useState(false);
+  const [error, setError] = useState("");
 
   const addUser = (username, age) => {
     const user = {
@@ -20,18 +20,18 @@ function App() {
   };
 
   const closeModal = () => {
-    setInvalidInput(false);
+    setError("");
   };
 
-  const throwInvalidError = () => {
-    setInvalidInput(true);
+  const throwError = (message) => {
+    setError(message.message);
   };
 
   return (
     <div className="flex flex-col justify-center items-center grow bg-zinc-300 gap-8">
-      <UserForm addUser={addUser} throwError={throwInvalidError} />
+      <UserForm addUser={addUser} throwError={throwError} />
       {users.length > 0 && <UsersDisplay content={users} />}
-      {invalidInput && <ErrorModal closeModal={closeModal} />}
+      {error && <ErrorModal closeModal={closeModal} message={error} />}
     </div>
   );
 }

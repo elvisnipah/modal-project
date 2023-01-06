@@ -15,11 +15,15 @@ function UserForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (username === "" || age === "") {
-      props.throwError();
+      props.throwError({
+        message: "Enter a valid name or age (non-empty values)",
+      });
       return;
     }
     if (age < 1) {
-      props.throwError();
+      props.throwError({
+        message: "Enter a valid age",
+      });
       return;
     }
     props.addUser(username, age);

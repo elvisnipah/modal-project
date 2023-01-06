@@ -11,7 +11,7 @@ function ErrorModal(props) {
           Invalid Input
         </div>
         <div className="bg-white p-2 flex flex-col">
-          <p>Please enter a valid name and age(non-empty values)</p>
+          <p>{props.message}</p>
           <button
             className="rounded-md p-2 bg-black text-white self-end"
             onClick={props.closeModal}
