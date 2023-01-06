@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function UserForm() {
+function UserForm(props) {
   const [username, setUsername] = useState("");
   const [age, setAge] = useState("");
 
@@ -14,11 +14,21 @@ function UserForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(username, age);
+    if (username === "" || age === "") {
+      props.throwError();
+      return;
+    }
+    if (age < 1) {
+      props.throwError();
+      return;
+    }
+    props.addUser(username, age);
+    setUsername("");
+    setAge("");
   };
 
   return (
-    <div className="bg-zinc-200 text-black p-8 rounded-xl">
+    <div className="bg-zinc-200 p-8 rounded-xl w-[20rem]">
       <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-1">
           <label htmlFor="username">Username</label>
